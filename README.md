@@ -1,14 +1,13 @@
-[![Build Status - Master](https://travis-ci.org/juju4/harden_windows_server.svg?branch=master)](https://travis-ci.org/juju4/harden_windows_server)
-[![Build Status - Devel](https://travis-ci.org/juju4/harden_windows_server.svg?branch=devel)](https://travis-ci.org/juju4/harden_windows_server/branches)
-[![Appveyor - Master](https://ci.appveyor.com/api/projects/status/ilyqrkiv5jo3ohk8/branch/master?svg=true)](https://ci.appveyor.com/project/juju4/harden-windows-server)
-![Appveyor - Devel](https://ci.appveyor.com/api/projects/status/ilyqrkiv5jo3ohk8/branch/devel?svg=true)
+# harden_windows_server - CIS Level 1
 
-# harden_windows_server
+## WARNING
+
+This is a fork from https://github.com/autostructure/harden_windows_server and is undergoing some fairly experimental rework to get it working with Level 1 only, but also supporting Windows 2012 R2 and Windows 2016. At the moment it will not be working.
 
 ## Module Description
-This module hardens Windows Server 2008 R2 to the most recent CIS Benchmark, which can be found here:
+This module hardens Windows Server 2008 R2 to a CIS Benchmark Level 1, Member Server.
 
-https://www.cisecurity.org/cis-benchmarks/
+Refer: https://www.cisecurity.org/cis-benchmarks/
 
 ## Setup
 To use this module, you need to specify whether or not the node is a **Domain Controller** or a **Member Server** by modifying the `is_domain_controller` parameter. The CIS Benchmark recommends a different security configuration for each type of node. This module defaults to the **Member Server** configuration.
