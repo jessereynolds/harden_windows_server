@@ -88,9 +88,9 @@ class harden_windows_server::configure {
     }
   }
 
-  if($harden_windows_server::configure_access_this_computer_from_the_network) {
+  if($harden_windows_server::configure_access_this_computer_configure_enable_computer_and_user_accounts_to_be_trusted_for_delegation_the_network) {
     if($harden_windows_server::is_domain_controller) {
-      local_security_policy { 'Access this computer from the network':
+      local_security_policy { 'Access this computer configure_enable_computer_and_user_accounts_to_be_trusted_for_delegation the network':
         ensure         => 'present',
         policy_setting => 'SeNetworkLogonRight',
         policy_type    => 'Privilege Rights',
@@ -98,7 +98,7 @@ class harden_windows_server::configure {
         policy_value   => 'set: Administrators, Authenticated Users, Enterprise Domain Controllers',
       }
     } else {
-      local_security_policy { 'Access this computer from the network':
+      local_security_policy { 'Access this computer configure_enable_computer_and_user_accounts_to_be_trusted_for_delegation the network':
         ensure         => 'present',
         policy_setting => 'SeNetworkLogonRight',
         policy_type    => 'Privilege Rights',
@@ -271,9 +271,9 @@ class harden_windows_server::configure {
     }
   }
 
-  if($harden_windows_server::configure_deny_access_to_this_computer_from_the_network) {
+  if($harden_windows_server::configure_deny_access_to_this_computer_configure_enable_computer_and_user_accounts_to_be_trusted_for_delegation_the_network) {
     if($harden_windows_server::is_domain_controller) {
-      local_security_policy { 'Deny access to this computer from the network':
+      local_security_policy { 'Deny access to this computer configure_enable_computer_and_user_accounts_to_be_trusted_for_delegation the network':
         ensure         => 'present',
         policy_setting => 'SeDenyNetworkLogonRight',
         policy_type    => 'Privilege Rights',
@@ -281,7 +281,7 @@ class harden_windows_server::configure {
         policy_value   => 'set: Guests, Local',
       }
     } else {
-      local_security_policy { 'Deny access to this computer from the network':
+      local_security_policy { 'Deny access to this computer configure_enable_computer_and_user_accounts_to_be_trusted_for_delegation the network':
         ensure         => 'present',
         policy_setting => 'SeDenyNetworkLogonRight',
         policy_type    => 'Privilege Rights',
@@ -347,8 +347,8 @@ class harden_windows_server::configure {
     }
   }
 
-  if($harden_windows_server::ensure_force_shutdown_from_a_remote_system_is_set_to_administrators) {
-    local_security_policy { 'Force shutdown from a remote system':
+  if($harden_windows_server::ensure_force_shutdown_configure_enable_computer_and_user_accounts_to_be_trusted_for_delegation_a_remote_system_is_set_to_administrators) {
+    local_security_policy { 'Force shutdown configure_enable_computer_and_user_accounts_to_be_trusted_for_delegation a remote system':
       ensure         => 'present',
       policy_setting => 'SeRemoteShutdownPrivilege',
       policy_type    => 'Privilege Rights',
@@ -606,8 +606,8 @@ class harden_windows_server::configure {
     }
   }
 
-  if($harden_windows_server::ensure_devices_prevent_users_from_installing_printer_drivers_is_set_to_enabled) {
-    local_security_policy { 'Devices: Prevent users from installing printer drivers':
+  if($harden_windows_server::ensure_devices_prevent_users_configure_enable_computer_and_user_accounts_to_be_trusted_for_delegation_installing_printer_drivers_is_set_to_enabled) {
+    local_security_policy { 'Devices: Prevent users configure_enable_computer_and_user_accounts_to_be_trusted_for_delegation installing printer drivers':
       ensure         => 'present',
       policy_setting => 'MACHINE\System\CurrentControlSet\Control\Print\Providers\LanMan Print Services\Servers\AddPrinterDrivers',
       policy_type    => 'Registry Values',
@@ -1611,7 +1611,7 @@ class harden_windows_server::configure {
   #
   # }
   #
-  # if($harden_windows_server::ensure_mss_nonamereleaseondemand_allow_the_computer_to_ignore_netbios_name_release_requests_except_from_wins_server_is_enabled) {
+  # if($harden_windows_server::ensure_mss_nonamereleaseondemand_allow_the_computer_to_ignore_netbios_name_release_requests_except_configure_enable_computer_and_user_accounts_to_be_trusted_for_delegation_wins_server_is_enabled) {
   #
   # }
   #
@@ -1933,589 +1933,6 @@ class harden_windows_server::configure {
       }
     }
   }
-
-  # ALL LEVEL 2
-  # if($harden_windows_server::ensure_restrict_unauthenticated_rpc_clients_is_set_to_enabled_authenticatied) {
-  #   if(!$harden_windows_server::is_domain_controller) {
-  #
-  #   }
-  # }
-  #
-  # if($harden_windows_server::ensure_microsoft_support_diagnostic_tool_turn_on_msdt_interactive_communication_with_support_provider_is_set_to_disabled) {
-  #
-  # }
-  #
-  # if($harden_windows_server::ensure_enable_disable_perftrack_is_set_to_disabled) {
-  #
-  # }
-  #
-  # if($harden_windows_server::ensure_enable_windows_ntp_client_is_set_to_enabled) {
-  #
-  # }
-  #
-  # if($harden_windows_server::ensure_enable_windows_ntp_server_is_set_to_disabled) {
-  #   if(!$harden_windows_server::is_domain_controller) {
-  #
-  #   }
-  # }
-
-  if($harden_windows_server::ensure_disallow_autoplay_for_non_volume_devices_is_set_to_enabled) {
-    registry::value { 'NoAutoplayfornonVolume':
-      key   => 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Explorer',
-      value => 'NoAutoplayfornonVolume',
-      type  => 'dword',
-      data  => '0x00000001',
-    }
-  }
-
-  if($harden_windows_server::ensure_set_the_default_behavior_for_autorun_is_set_to_enabled_do_not_execute_any_autorun_commands) {
-    registry::value { 'NoAutorun':
-      key   => 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer',
-      value => 'NoAutorun',
-      type  => 'dword',
-      data  => '0x00000001',
-    }
-  }
-
-  if($harden_windows_server::ensure_turn_off_autoplay_is_set_to_enabled_all_drives) {
-    registry::value { 'NoDriveTypeAutoRun':
-      key   => 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer',
-      value => 'NoDriveTypeAutoRun',
-      type  => 'dword',
-      data  => '0x000000ff',
-    }
-  }
-
-  # Can't find GPO for this
-  # if($harden_windows_server::ensure_do_not_display_the_password_reveal_button_is_set_to_enabled) {
-  #
-  # }
-
-  if($harden_windows_server::ensure_enumerate_administrator_accounts_on_elevation_is_set_to_disabled) {
-    registry::value { 'EnumerateAdministrators':
-      key   => 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\CredUI',
-      value => 'EnumerateAdministrators',
-      type  => 'dword',
-      data  => '0x00000000',
-    }
-  }
-
-  if($harden_windows_server::ensure_turn_off_desktop_gadgets_is_set_to_enabled) {
-    registry::value { 'TurnOffSidebar':
-      key   => 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Windows\Sidebar',
-      value => 'TurnOffSidebar',
-      type  => 'dword',
-      data  => '0x00000001',
-    }
-  }
-
-  if($harden_windows_server::ensure_turn_off_user_installed_desktop_gadgets_is_set_to_enabled) {
-    registry::value { 'TurnOffUserInstalledGadgets':
-      key   => 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Windows\Sidebar',
-      value => 'TurnOffUserInstalledGadgets',
-      type  => 'dword',
-      data  => '0x00000001',
-    }
-  }
-
-  # Have to download a thing and it's deprecated
-  # if($harden_windows_server::ensure_emet_551_or_higher_is_installed) {
-  #
-  # }
-  #
-  # if($harden_windows_server::ensure_default_action_and_mitigation_settings_is_set_to_enabled_plus_subsettings) {
-  #
-  # }
-  #
-  # if($harden_windows_server::ensure_default_protections_for_internet_explorer_is_set_to_enabled) {
-  #
-  # }
-  #
-  # if($harden_windows_server::ensure_default_protections_for_popular_software_is_set_to_enabled) {
-  #
-  # }
-  #
-  # if($harden_windows_server::ensure_default_protections_for_recommended_software_is_set_to_enabled) {
-  #
-  # }
-  #
-  # if($harden_windows_server::ensure_system_aslr_is_set_to_enabled_application_opt_in) {
-  #
-  # }
-  #
-  # if($harden_windows_server::ensure_system_dep_is_set_to_enabled_application_opt_out) {
-  #
-  # }
-  #
-  # if($harden_windows_server::ensure_system_sehop_is_set_to_enabled_application_opt_out) {
-  #
-  # }
-
-
-  if($harden_windows_server::ensure_application_control_event_log_behavior_when_the_log_file_reaches_its_maximum_size_is_set_to_disabled) {
-    registry::value { 'ApplicationRetention':
-      key   => 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\EventLog\Application',
-      value => 'Retention',
-      type  => 'string',
-      data  => '0',
-    }
-  }
-
-  if($harden_windows_server::ensure_application_specify_the_maximum_log_file_size_kb_is_set_to_enabled_32768_or_greater) {
-    registry::value { 'ApplicationMaxSize':
-      key   => 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\EventLog\Application',
-      value => 'MaxSize',
-      type  => 'dword',
-      data  => '0x00008000',
-    }
-  }
-
-  if($harden_windows_server::ensure_security_control_event_log_behavior_when_the_log_file_reaches_its_maximum_size_is_set_to_disabled) {
-    registry::value { 'SecurityRetention':
-      key   => 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\EventLog\Security',
-      value => 'Retention',
-      type  => 'string',
-      data  => '0',
-    }
-  }
-
-  if($harden_windows_server::ensure_security_specify_the_maximum_log_file_size_kb_is_set_to_enabled_196608_or_greater) {
-    registry::value { 'SecurityMaxSize':
-      key   => 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\EventLog\Security',
-      value => 'MaxSize',
-      type  => 'dword',
-      data  => '0x00030000',
-    }
-  }
-
-  if($harden_windows_server::ensure_setup_control_event_log_behavior_when_the_log_reaches_its_maximum_size_is_set_to_disabled) {
-    registry::value { 'SetupRetention':
-      key   => 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\EventLog\Setup',
-      value => 'Retention',
-      type  => 'string',
-      data  => '0',
-    }
-  }
-
-  if($harden_windows_server::ensure_setup_specify_the_maximum_log_file_size_kb_is_set_to_enabled_32768_or_greater) {
-    registry::value { 'SetupMaxSize':
-      key   => 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\EventLog\Setup',
-      value => 'MaxSize',
-      type  => 'dword',
-      data  => '0x00008000',
-    }
-  }
-
-  if($harden_windows_server::ensure_system_control_event_log_behavior_when_the_log_file_reaches_its_maximum_size_is_set_to_disabled) {
-    registry::value { 'SystemRetention':
-      key   => 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\EventLog\System',
-      value => 'Retention',
-      type  => 'string',
-      data  => '0',
-    }
-  }
-
-  if($harden_windows_server::ensure_system_specify_the_maximum_log_file_size_kb_is_set_to_enabled_32768_or_greater) {
-    registry::value { 'SystemMaxSize':
-      key   => 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\EventLog\System',
-      value => 'MaxSize',
-      type  => 'dword',
-      data  => '0x00008000',
-    }
-  }
-
-  if($harden_windows_server::ensure_turn_off_data_execution_prevention_for_explorer_is_set_to_disabled) {
-    registry::value { 'NoDataExecutionPrevention':
-      key   => 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Explorer',
-      value => 'NoDataExecutionPrevention',
-      type  => 'dword',
-      data  => '0x00000000',
-    }
-  }
-
-  if($harden_windows_server::ensure_turn_off_heap_termination_on_corruption_is_set_to_disabled) {
-    registry::value { 'NoHeapTerminationOnCorruption':
-      key   => 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Explorer',
-      value => 'NoHeapTerminationOnCorruption',
-      type  => 'dword',
-      data  => '0x00000000',
-    }
-  }
-
-  if($harden_windows_server::ensure_turn_off_shell_protocol_proteted_mode_is_set_to_disabled) {
-    registry::value { 'PreXPSP2ShellProtocolBehavior':
-      key   => 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer',
-      value => 'PreXPSP2ShellProtocolBehavior',
-      type  => 'dword',
-      data  => '0x00000000',
-    }
-  }
-
-  if($harden_windows_server::ensure_turn_off_location_is_set_to_enabled) {
-    registry::value { 'DisableLocation':
-      key   => 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors',
-      value => 'DisableLocation',
-      type  => 'dword',
-      data  => '0x00000001',
-    }
-  }
-
-  # Can't find these administrative templates
-  # if($harden_windows_server::ensure_prevent_the_usage_of_onedrive_for_filestorage_is_set_to_enabled) {
-  #
-  # }
-  #
-  # if($harden_windows_server::ensure_prevent_the_usage_of_onedrive_for_file_storage_on_windows_81_is_set_to_enabled) {
-  #
-  # }
-
-  if($harden_windows_server::ensure_do_not_allow_passwords_to_be_saved_is_set_to_enabled) {
-    registry::value { 'DisablePasswordSaving':
-      key   => 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services',
-      value => 'DisablePasswordSaving',
-      type  => 'dword',
-      data  => '0x00000001',
-    }
-  }
-
-  if($harden_windows_server::ensure_restrict_remote_desktop_services_users_to_a_single_remote_desktop_services_session_is_set_to_enabled) {
-    registry::value { 'fSingleSessionPerUser':
-      key   => 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services',
-      value => 'fSingleSessionPerUser',
-      type  => 'dword',
-      data  => '0x00000001',
-    }
-  }
-
-  if($harden_windows_server::ensure_do_not_allow_com_port_redirection_is_set_to_enabled) {
-    registry::value { 'fDisableCcm':
-      key   => 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services',
-      value => 'fDisableCcm',
-      type  => 'dword',
-      data  => '0x00000001',
-    }
-  }
-
-  if($harden_windows_server::ensure_do_not_allow_drive_redirection_is_set_to_enabled) {
-    registry::value { 'fDisableCdm':
-      key   => 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services',
-      value => 'fDisableCdm',
-      type  => 'dword',
-      data  => '0x00000001',
-    }
-  }
-
-  if($harden_windows_server::ensure_do_not_allow_lpt_port_redirection_is_set_to_enabled) {
-    registry::value { 'fDisableLPT':
-      key   => 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services',
-      value => 'fDisableLPT',
-      type  => 'dword',
-      data  => '0x00000001',
-    }
-  }
-
-  if($harden_windows_server::ensure_do_not_allow_supported_plug_and_play_device_redirection_is_set_to_enabled) {
-    registry::value { 'fDisablePNPRedir':
-      key   => 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services',
-      value => 'fDisablePNPRedir',
-      type  => 'dword',
-      data  => '0x00000001',
-    }
-  }
-
-  if($harden_windows_server::ensure_always_prompt_for_password_upon_connection_is_set_to_enabled) {
-    registry::value { 'fPromptForPassword':
-      key   => 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services',
-      value => 'fPromptForPassword',
-      type  => 'dword',
-      data  => '0x00000001',
-    }
-  }
-
-  if($harden_windows_server::ensure_require_secure_rpc_communication_is_set_to_enabled) {
-    registry::value { 'fEncryptRPCTraffic':
-      key   => 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services',
-      value => 'fEncryptRPCTraffic',
-      type  => 'dword',
-      data  => '0x00000001',
-    }
-  }
-
-  if($harden_windows_server::ensure_set_client_connection_encryption_level_is_set_to_enabled_high_level) {
-    registry::value { 'MinEncryptionLevel':
-      key   => 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services',
-      value => 'MinEncryptionLevel',
-      type  => 'dword',
-      data  => '0x00000003',
-    }
-  }
-
-  if($harden_windows_server::ensure_set_time_limit_for_active_but_idle_remote_desktop_services_sessions_is_set_to_enabled_15_minutes_or_less) {
-    registry::value { 'MaxIdleTime':
-      key   => 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services',
-      value => 'MaxIdleTime',
-      type  => 'dword',
-      data  => '0x000dbba0',
-    }
-  }
-
-  if($harden_windows_server::ensure_set_time_limit_for_disconnected_sessions_is_set_to_enabled_1_minute) {
-    registry::value { 'MaxDisconnectionTime':
-      key   => 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services',
-      value => 'MaxDisconnectionTime',
-      type  => 'dword',
-      data  => '0x0000ea60',
-    }
-  }
-
-  if($harden_windows_server::ensure_do_not_delete_temp_folders_upon_exit_is_set_to_disabled) {
-    registry::value { 'DeleteTempDirsOnExit':
-      key   => 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services',
-      value => 'DeleteTempDirsOnExit',
-      type  => 'dword',
-      data  => '0x00000001',
-    }
-  }
-
-  if($harden_windows_server::ensure_do_not_use_temporary_folders_per_session_is_set_to_disabled) {
-    registry::value { 'PerSessionTempDir':
-      key   => 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services',
-      value => 'PerSessionTempDir',
-      type  => 'dword',
-      data  => '0x00000001',
-    }
-  }
-
-  if($harden_windows_server::ensure_prevent_downloading_of_enclosures_is_set_to_enabled) {
-    registry::value { 'DisableEnclosureDownload':
-      key   => 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Internet Explorer\Feeds',
-      value => 'DisableEnclosureDownload',
-      type  => 'dword',
-      data  => '0x00000001',
-    }
-  }
-
-  #non default template
-  # if($harden_windows_server::ensure_allow_indexing_of_encrypted_files_is_set_to_disabled) {
-  #
-  # }
-
-  #cant find template, maybe spynet?
-  # if($harden_windows_server::ensure_join_microsoft_maps_is_set_to_disabled) {
-  #
-  # }
-
-  if($harden_windows_server::ensure_configure_default_consent_is_set_to_enabled_always_ask_before_sending_data) {
-    registry::value { 'DefaultConsent':
-      key   => 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Error Reporting\Consent',
-      value => 'DefaultConsent',
-      type  => 'dword',
-      data  => '0x00000001',
-    }
-  }
-
-  if($harden_windows_server::ensure_allow_user_control_over_installs_is_set_to_disabled) {
-    registry::value { 'EnableUserControl':
-      key   => 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Installer',
-      value => 'EnableUserControl',
-      type  => 'dword',
-      data  => '0x00000000',
-    }
-  }
-
-  if($harden_windows_server::ensure_always_install_with_elevated_privileges_is_set_to_disabled) {
-    registry::value { 'AlwaysInstallElevated':
-      key   => 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Installer',
-      value => 'AlwaysInstallElevated',
-      type  => 'dword',
-      data  => '0x00000000',
-    }
-  }
-
-  if($harden_windows_server::ensure_prevent_internet_explorer_security_prompt_for_windows_installer_scripts_is_set_to_disabled) {
-    registry::value { 'EnableUserControl':
-      key   => 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Installer',
-      value => 'EnableUserControl',
-      type  => 'dword',
-      data  => '0x00000000',
-    }
-  }
-
-  # Need updated template
-  # if($harden_windows_server::ensure_turn_on_powershell_script_block_logging_is_set_to_disabled) {
-  #
-  # }
-  #
-  # if($harden_windows_server::ensure_turn_on_powershell_transcription_is_set_to_disabled) {
-  #
-  # }
-
-  if($harden_windows_server::ensure_winrm_client_allow_basic_authentication_is_set_to_disabled) {
-    registry::value { 'ClientAllowBasic':
-      key   => 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WinRM\Client',
-      value => 'AllowBasic',
-      type  => 'dword',
-      data  => '0x00000000',
-    }
-  }
-
-  if($harden_windows_server::ensure_winrm_client_allow_unencrypted_traffic_is_set_to_disabled) {
-    registry::value { 'ClientAllowUnencryptedTraffic':
-      key   => 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WinRM\Client',
-      value => 'AllowUnencryptedTraffic',
-      type  => 'dword',
-      data  => '0x00000000',
-    }
-  }
-
-  if($harden_windows_server::ensure_disallow_digest_authentication_is_set_to_enabled) {
-    registry::value { 'AllowDigest':
-      key   => 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WinRM\Client',
-      value => 'AllowDigest',
-      type  => 'dword',
-      data  => '0x00000000',
-    }
-  }
-
-  if($harden_windows_server::ensure_winrm_service_allow_basic_authentication_is_set_to_disabled) {
-    registry::value { 'ServiceAllowBasic':
-      key   => 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WinRM\Service',
-      value => 'AllowBasic',
-      type  => 'dword',
-      data  => '0x00000000',
-    }
-  }
-
-  # Can't find GPO
-  # if($harden_windows_server::ensure_allow_remote_server_management_through_winrm_is_set_to_disabled) {
-  #
-  # }
-
-  if($harden_windows_server::ensure_winrm_service_allow_unencrypted_traffic_is_set_to_disabled) {
-    registry::value { 'ServiceAllowUnencryptedTraffic':
-      key   => 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WinRM\Service',
-      value => 'AllowUnencryptedTraffic',
-      type  => 'dword',
-      data  => '0x00000000',
-    }
-  }
-
-  # Can't find GPO
-  # if($harden_windows_server::ensure_disallow_winrm_from_storing_runas_credentials_is_set_to_enabled) {
-  #
-  # }
-
-  if($harden_windows_server::ensure_allow_remote_shell_access_is_set_to_disabled) {
-    registry::value { 'AllowRemoteShellAccess':
-      key   => 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WinRM\Service\WinRS',
-      value => 'AllowRemoteShellAccess',
-      type  => 'dword',
-      data  => '0x00000000',
-    }
-  }
-
-  if($harden_windows_server::ensure_configure_automatic_updates_is_set_to_enabled) {
-    registry::value { 'NoAutoUpdate':
-      key   => 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU',
-      value => 'NoAutoUpdate',
-      type  => 'dword',
-      data  => '0x00000000',
-    }
-  }
-
-  if($harden_windows_server::ensure_configure_automatic_updates_scheduled_install_day_is_set_to_0_every_day) {
-    registry::value { 'ScheduledInstallDay':
-      key   => 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU',
-      value => 'ScheduledInstallDay',
-      type  => 'dword',
-      data  => '0x00000000',
-    }
-  }
-
-  if($harden_windows_server::ensure_do_not_adjust_default_option_to_install_updates_and_shut_down_in_shut_down_windows_dialog_box_is_set_to_disabled) {
-    registry::value { 'NoAUAsDefaultShutdownOption':
-      key   => 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU',
-      value => 'NoAUAsDefaultShutdownOption',
-      type  => 'dword',
-      data  => '0x00000000',
-    }
-  }
-
-  if($harden_windows_server::ensure_do_not_display_install_updates_and_shut_down_option_in_shut_down_windows_dialog_box_is_set_to_disabled) {
-    registry::value { 'NoAUShutdownOption':
-      key   => 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU',
-      value => 'NoAUShutdownOption',
-      type  => 'dword',
-      data  => '0x00000000',
-    }
-  }
-
-  if($harden_windows_server::ensure_no_auto_restart_with_logged_on_users_for_scheduled_automatic_updates_installations_is_set_to_disabled) {
-    registry::value { 'NoAutoRebootWithLoggedOnUsers':
-      key   => 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU',
-      value => 'NoAutoRebootWithLoggedOnUsers',
-      type  => 'dword',
-      data  => '0x00000000',
-    }
-  }
-
-  if($harden_windows_server::ensure_reschedule_automatic_updates_scheduled_installations_is_set_to_enabled_1_minute) {
-    registry::value { 'RescheduleWaitTimeEnabled':
-      key   => 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU',
-      value => 'RescheduleWaitTimeEnabled',
-      type  => 'dword',
-      data  => '0x00000001',
-    }
-    registry::value { 'RescheduleWaitTime':
-      key   => 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU',
-      value => 'RescheduleWaitTime',
-      type  => 'dword',
-      data  => '0x00000001',
-    }
-  }
-
-  # Need to figure out how to make changes to each user on the system
-  # if($harden_windows_server::ensure_enable_screen_saver_is_set_to_enabled) {
-  #
-  # }
-  #
-  # if($harden_windows_server::ensure_force_specific_screen_saver_screen_saver_executable_name_is_set_to_enabled_scrnsavescr) {
-  #
-  # }
-  #
-  # if($harden_windows_server::ensure_password_protect_the_screen_saver_is_set_to_enabled) {
-  #
-  # }
-  #
-  # if($harden_windows_server::ensure_screen_saver_timeout_is_set_to_enabled_900_seconds_or_fewer_but_not_0) {
-  #
-  # }
-  #
-  # if($harden_windows_server::ensure_turn_off_help_experience_improvement_program_is_set_to_enabled) {
-  #
-  # }
-  #
-  # if($harden_windows_server::ensure_do_not_preserve_zone_information_in_file_attachments_is_set_to_disabled) {
-  #
-  # }
-  #
-  # if($harden_windows_server::ensure_notify_antivirus_programs_when_opening_attachments_is_set_to_enabled) {
-  #
-  # }
-  #
-  # if($harden_windows_server::ensure_prevent_users_from_sharing_files_within_their_profile_is_set_to_enabled) {
-  #
-  # }
-  #
-  # if($harden_windows_server::ensure_always_install_with_elevated_privileges_is_set_to_disabled_windows_installer) {
-  #
-  # }
-  #
-  # if($harden_windows_server::ensure_prevent_codec_download_is_set_to_enabled) {
-  #
-  # }
-
-
 
 
 }

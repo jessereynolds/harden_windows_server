@@ -2178,23 +2178,24 @@ class harden_windows_server::configure {
     }
   }
 
-  if($harden_windows_server::ensure_restrict_remote_desktop_services_users_to_a_single_remote_desktop_services_session_is_set_to_enabled) {
-    registry::value { 'fSingleSessionPerUser':
-      key   => 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services',
-      value => 'fSingleSessionPerUser',
-      type  => 'dword',
-      data  => '0x00000001',
-    }
-  }
-
-  if($harden_windows_server::ensure_do_not_allow_com_port_redirection_is_set_to_enabled) {
-    registry::value { 'fDisableCcm':
-      key   => 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services',
-      value => 'fDisableCcm',
-      type  => 'dword',
-      data  => '0x00000001',
-    }
-  }
+# not part of L1
+#  if($harden_windows_server::ensure_restrict_remote_desktop_services_users_to_a_single_remote_desktop_services_session_is_set_to_enabled) {
+#    registry::value { 'fSingleSessionPerUser':
+#      key   => 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services',
+#      value => 'fSingleSessionPerUser',
+#      type  => 'dword',
+#      data  => '0x00000001',
+#    }
+#  }
+#
+#  if($harden_windows_server::ensure_do_not_allow_com_port_redirection_is_set_to_enabled) {
+#    registry::value { 'fDisableCcm':
+#      key   => 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services',
+#      value => 'fDisableCcm',
+#      type  => 'dword',
+#      data  => '0x00000001',
+#    }
+#  }
 
   if($harden_windows_server::ensure_do_not_allow_drive_redirection_is_set_to_enabled) {
     registry::value { 'fDisableCdm':
@@ -2205,14 +2206,14 @@ class harden_windows_server::configure {
     }
   }
 
-  if($harden_windows_server::ensure_do_not_allow_lpt_port_redirection_is_set_to_enabled) {
-    registry::value { 'fDisableLPT':
-      key   => 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services',
-      value => 'fDisableLPT',
-      type  => 'dword',
-      data  => '0x00000001',
-    }
-  }
+  #if($harden_windows_server::ensure_do_not_allow_lpt_port_redirection_is_set_to_enabled) {
+  #  registry::value { 'fDisableLPT':
+  #    key   => 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services',
+  #    value => 'fDisableLPT',
+  #    type  => 'dword',
+  #    data  => '0x00000001',
+  #  }
+  #}
 
   if($harden_windows_server::ensure_do_not_allow_supported_plug_and_play_device_redirection_is_set_to_enabled) {
     registry::value { 'fDisablePNPRedir':
@@ -2222,6 +2223,8 @@ class harden_windows_server::configure {
       data  => '0x00000001',
     }
   }
+
+  # TODO: progress marker
 
   if($harden_windows_server::ensure_always_prompt_for_password_upon_connection_is_set_to_enabled) {
     registry::value { 'fPromptForPassword':
