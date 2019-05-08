@@ -1,12 +1,12 @@
 {
-  "name": "autostructure-harden_windows_server",
-  "version": "0.1.23",
-  "author": "Autostructure",
+  "name": "jesse-harden_windows_server",
+  "version": "0.0.1",
+  "author": "Autostructure, Jesse Reynolds",
   "summary": "Hardens Windows Server 2008 R2",
   "license": "Apache-2.0",
-  "source": "https://github.com/autostructure/harden_windows_server",
-  "project_page": "https://github.com/autostructure/harden_windows_server",
-  "issues_url": "https://github.com/autostructure/harden_windows_server",
+  "source": "https://github.com/jessereynolds/harden_windows_server",
+  "project_page": "https://github.com/jessereynolds/harden_windows_server",
+  "issues_url": "https://github.com/jessereynolds/harden_windows_server",
   "dependencies": [
     {
       "name": "puppetlabs/stdlib",
@@ -36,7 +36,7 @@
   "requirements": [
     {
       "name": "puppet",
-      "version_requirement": ">= 4.7.0 < 6.0.0"
+      "version_requirement": ">= 5.0.0 < 7.0.0"
     }
   ],
   "description": "Harden Windows Server",
