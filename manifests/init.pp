@@ -321,6 +321,9 @@ class harden_windows_server (
   Boolean $ensure_select_when_quality_updates_are_received_is_set_to_enabled_0_days = false,
   Boolean $ensure_configure_windows_spotlight_on_lockeen_is_set_to_disabled = false,
   Boolean $ensure_do_not_suggest_third_party_content_in_windows_spotlight_is_set_to_enabled = false,
+
+  Boolean $advanced_audit_policy_configuration = false,
+  Boolean $basic_audit_policy_configuration = false,
 ) {
 
   # DC only - ignore for now
@@ -333,61 +336,40 @@ class harden_windows_server (
   $ensure_microsoft_network_server_spn_target_name_validation_level_is_set_to_accept_if_provided_by_client = false
 
   # added to translator
-  $configure_access_this_computer_configure_enable_computer_and_user_accounts_to_be_trusted_for_delegation_the_network = false
-  $configure_allow_log_on_locally = false
-  $configure_deny_access_to_this_computer_configure_enable_computer_and_user_accounts_to_be_trusted_for_delegation_the_network = false
-  $ensure_deny_log_on_through_remote_desktop_services_to_include_guests_local_account = false
-  $configure_enable_computer_and_user_acounts_to_be_trusted_for_delegation = false
-  $ensure_force_shutdown_configure_enable_computer_and_user_accounts_to_be_trusted_for_delegation_a_remote_system_is_set_to_administrators = false
-  $ensure_lock_pages_in_menory_is_set_to_no_one = false
-  $ensure_accounts_limit_local_account_use_of_blank_password_to_console_logon_only_is_set_to_enabled = false
-  $ensure_audit_force_audit_policy_subcategory_settings_to_override_audit_policy_category_settings = false
-  $ensure_devices_prevent_users_configure_enable_computer_and_user_accounts_to_be_trusted_for_delegation_installing_printer_drivers_is_set_to_enabled = false
-  $ensure_domain_member_digitally_encrypt_or_sign_secure_channel_data_when_possible_is_set_to_enabled = false
-  $ensure_domain_member_require_strong_session_key_windows_2000_or_later_is_set_to_enabled = false
-  $ensure_interactive_logon_do_not_require_ctrl_alt_del_is_set_to_disabled = false
-  $ensure_microsoft_network_server_idle_time_required_before_suspending_session_is_set_to_15_or_fewer_minutes = false
-  $ensure_network_access_allow_anonymous_sid_name_tranlation_is_set_to_disabled = false
-  $ensure_network_access_do_not_allow_anonymous_enumeration_of_sam_accounts_is_set_to_enabled = false
-  $ensure_network_access_do_not_allow_anonymous_enumeration_of_sam_accounts_and_shared_is_set_to_enabled = false
-  $ensure_network_security_allow_pku2u_authentication_requests_to_use_online_identities_is_set_to_disabled = false
+  # $configure_access_this_computer_configure_enable_computer_and_user_accounts_to_be_trusted_for_delegation_the_network = false
+  # $configure_allow_log_on_locally = false
+  # $configure_deny_access_to_this_computer_configure_enable_computer_and_user_accounts_to_be_trusted_for_delegation_the_network = false
+  # $ensure_deny_log_on_through_remote_desktop_services_to_include_guests_local_account = false
+  # $configure_enable_computer_and_user_acounts_to_be_trusted_for_delegation = false
+  # $ensure_force_shutdown_configure_enable_computer_and_user_accounts_to_be_trusted_for_delegation_a_remote_system_is_set_to_administrators = false
+  # $ensure_lock_pages_in_menory_is_set_to_no_one = false
+  # $ensure_accounts_limit_local_account_use_of_blank_password_to_console_logon_only_is_set_to_enabled = false
+  # $ensure_audit_force_audit_policy_subcategory_settings_to_override_audit_policy_category_settings = false
+  # $ensure_devices_prevent_users_configure_enable_computer_and_user_accounts_to_be_trusted_for_delegation_installing_printer_drivers_is_set_to_enabled = false
+  # $ensure_domain_member_digitally_encrypt_or_sign_secure_channel_data_when_possible_is_set_to_enabled = false
+  # $ensure_domain_member_require_strong_session_key_windows_2000_or_later_is_set_to_enabled = false
+  # $ensure_interactive_logon_do_not_require_ctrl_alt_del_is_set_to_disabled = false
+  # $ensure_microsoft_network_server_idle_time_required_before_suspending_session_is_set_to_15_or_fewer_minutes = false
+  # $ensure_network_access_allow_anonymous_sid_name_tranlation_is_set_to_disabled = false
+  # $ensure_network_access_do_not_allow_anonymous_enumeration_of_sam_accounts_is_set_to_enabled = false
+  # $ensure_network_access_do_not_allow_anonymous_enumeration_of_sam_accounts_and_shared_is_set_to_enabled = false
+  # $ensure_network_security_allow_pku2u_authentication_requests_to_use_online_identities_is_set_to_disabled = false
+  # $ensure_network_security_configure_encryption_types_allow_for_kerberos = false
+  # $ensure_network_security_ldap_client_signing_requirements_is_set_to_negotiate_signing = false
+  # $ensure_user_account_control_only_elevate_uiaccess_applications_that_are_installed_in_secure_locations = false
+  # $ensure_windows_firewall_private_logging_name_is_set_to_privatefwlog = false
+  # $ensure_windows_firewall_private_logging_size_limit_is_set_to_16384_or_greater = false
+  # $ensure_windows_firewall_public_settings_display_a_notification_is_set_to_yes = false
+  # $ensure_windows_firewall_public_logging_name_is_set_to_publicfwlog = false
+  # $ensure_windows_firewall_public_logging_size_limit_is_set_to_16384_or_greater = false
+  # $ensure_always_use_classic_logon = false
+  # $ensure_enable_rpc_endpoint_mapper_client_authentication_is_set_to_enabled = false
 
-  # TODO:
-  # these ones are all existing as variable names in configure.pp that were not found in this
-  # init.pp params section above as they likely are misspelt, named differently, or not relevant to
-  # Windows CIS Level 1
-  $ensure_network_access_sharing_and_security_model_for_local_accounts_is_set_to_classic = false
-  $ensure_network_security_configure_encryption_types_allow_for_kerberos = false
-  $ensure_network_security_lan_manager_authentication_level_is_set_to_send_ntlmv2_response_only = false
-  $ensure_network_security_ldap_client_signing_requirements_is_set_to_negotiate_signing = false
-  $ensure_network_security_minimum_session_security_for_ntlm_ssp_based_clients = false
-  $ensure_network_security_minimum_session_security_for_ntlm_ssp_based_servers = false
-  $ensure_shutdown_allow_system_to_be_shutdown_without_having_to_logon_is_set_to_disabled = false
-  $ensure_system_objects_require_case_insensitivity_for_non_windows_subsystems_is_enabled = false
-  $ensure_system_objects_strengthen_default_permissions_of_internal_system_objects_is_enabled = false
-  $ensure_user_account_control_admin_approval_mode_for_the_admin_account_is_enabled = false
-  $ensure_user_account_control_allow_uiaccess_applications_to_prompt_for_elevation_is_disabled = false
-  $ensure_user_account_control_behavior_of_the_elevation_prompt_for_administrators_in_admin_approval_mode = false
-  $ensure_user_account_control_behavior_of_the_elevation_prompt_for_standard_users = false
-  $ensure_user_account_control_detect_application_installations_and_prompt_for_elevation_is_enabled = false
-  $ensure_user_account_control_only_elevate_uiaccess_applications_that_are_installed_in_secure_locations = false
-  $ensure_user_account_control_run_all_administrators_in_admin_approval_mode_is_enabled = false
-  $ensure_user_account_control_switch_to_the_secure_desktop_when_prompting_for_elevation_is_enabled = false
-  $ensure_user_account_control_virtualize_file_and_registry_write_failures_to_per_user_location_is_enabled = false
-  $ensure_windows_firewall_domain_settings_apply_local_firewall_rules_is_set_to_yes_default = false
+  # These I cannot find in L1 for 2008r2, 2012r2, or 2016, so i'm assuming they are in L2:
+  $ensure_windows_firewall_domain_settings_apply_local_firewall_rules_is_set_to_yes_default
   $ensure_windows_firewall_domain_settings_apply_local_connection_security_rules_is_yes = false
-  $ensure_windows_firewall_domain_logging_name_is_set_to_domainfwlog = false
-  $ensure_windows_firewall_domain_logging_size_limit_is_16384_or_greater = false
   $ensure_windows_firewall_private_settings_apply_local_firewall_rules_is_set_to_yes_default = false
   $ensure_windows_firewall_private_settings_apply_local_connection_security_rules_is_set_to_yes_default = false
-  $ensure_windows_firewall_private_logging_name_is_set_to_privatefwlog = false
-  $ensure_windows_firewall_private_logging_size_limit_is_set_to_16384_or_greater = false
-  $ensure_windows_firewall_public_settings_display_a_notification_is_set_to_yes = false
-  $ensure_windows_firewall_public_logging_name_is_set_to_publicfwlog = false
-  $ensure_windows_firewall_public_logging_size_limit_is_set_to_16384_or_greater = false
-  $advanced_audit_policy_configuration = false
-  $ensure_always_use_classic_logon = false
-  $ensure_enable_rpc_endpoint_mapper_client_authentication_is_set_to_enabled = false
 
   # These ones all claim to be Level 2 in the original init.pp params
   # however some are actually level 1 and conflict with the params above so have been commented out

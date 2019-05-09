@@ -606,7 +606,7 @@ class harden_windows_server::configure {
     }
   }
 
-  if($harden_windows_server::ensure_devices_prevent_users_from_installing_printer_drivers_is_set_to_enabledto_enabled) {
+  if($harden_windows_server::ensure_devices_prevent_users_from_installing_printer_drivers_is_set_to_enabled) {
     local_security_policy { 'Devices: Prevent users configure_enable_computer_and_user_accounts_to_be_trusted_for_delegation installing printer drivers':
       ensure         => 'present',
       policy_setting => 'MACHINE\System\CurrentControlSet\Control\Print\Providers\LanMan Print Services\Servers\AddPrinterDrivers',
@@ -1443,24 +1443,14 @@ class harden_windows_server::configure {
     }
   }
 
-  if($harden_windows_server::advanced_audit_policy_configuration) {
+  if($harden_windows_server::basic_audit_policy_configuration) {
     auditpol { 'Credential Validation':
-      success => 'enable',
-      failure => 'enable',
-    }
-    auditpol { 'Application Group Management':
       success => 'enable',
       failure => 'enable',
     }
     auditpol { 'Computer Account Management':
       success => 'enable',
       failure => 'enable',
-    }
-    if($harden_windows_server::is_domain_controller) {
-      auditpol { 'Distribution Group Management':
-        success => 'enable',
-        failure => 'enable',
-      }
     }
     auditpol { 'Other Account Management Events':
       success => 'enable',
@@ -1512,6 +1502,20 @@ class harden_windows_server::configure {
       success => 'enable',
       failure => 'enable',
     }
+  }
+
+  if($harden_windows_server::advanced_audit_policy_configuration) {
+    auditpol { 'Application Group Management':
+      success => 'enable',
+      failure => 'enable',
+    }
+    if($harden_windows_server::is_domain_controller) {
+      auditpol { 'Distribution Group Management':
+        success => 'enable',
+        failure => 'enable',
+      }
+    }
+
     auditpol { 'Authentication Policy Change':
       success => 'enable',
       failure => 'disable',
