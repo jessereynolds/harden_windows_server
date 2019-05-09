@@ -993,7 +993,7 @@ class harden_windows_server::configure {
     }
   }
 
-  if($harden_windows_server::ensure_network_security_configure_encryption_types_allow_for_kerberos) {
+  if($harden_windows_server::ensure_network_security_configure_encryption_types_allowed_for_kerberos_is_set_to_aes128_hmac_sha1_aes256_hmac_sha1_future_encryption_types) {
     registry::value { 'SupportedEncryptionTypes':
       key   => 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\Kerberos\Parameters',
       value => 'SupportedEncryptionTypes',
@@ -1029,7 +1029,7 @@ class harden_windows_server::configure {
     }
   }
 
-  if($harden_windows_server::ensure_network_security_ldap_client_signing_requirements_is_set_to_negotiate_signing) {
+  if($harden_windows_server::ensure_network_security_ldap_client_signing_requirements_is_set_to_negotiate_signing_or_higher) {
     local_security_policy { 'Network security: LDAP client signing requirements':
       ensure         => 'present',
       policy_setting => 'MACHINE\System\CurrentControlSet\Services\LDAP\LDAPClientIntegrity',
@@ -1137,7 +1137,7 @@ class harden_windows_server::configure {
     }
   }
 
-  if($harden_windows_server::ensure_user_account_control_only_elevate_uiaccess_applications_that_are_installed_in_secure_locations) {
+  if($harden_windows_server::ensure_user_account_control_detect_application_installations_and_prompt_for_elevation_is_set_to_enabled) {
     local_security_policy { 'User Account Control: Only elevate UIAccess applications that are installed in secure locations':
       ensure         => 'present',
       policy_setting => 'MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System\EnableSecureUIAPaths',
@@ -1317,7 +1317,7 @@ class harden_windows_server::configure {
     }
   }
 
-  if($harden_windows_server::ensure_windows_firewall_private_logging_name_is_set_to_privatefwlog) {
+  if($harden_windows_server::ensure_windows_firewall_private_logging_name_is_set_to_systemroot_system32_logfiles_firewall_privatefwlog) {
     registry::value { 'PrivateLogFilePath':
       key   => 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsFirewall\PrivateProfile\Logging',
       value => 'LogFilePath',
@@ -1326,7 +1326,7 @@ class harden_windows_server::configure {
     }
   }
 
-  if($harden_windows_server::ensure_windows_firewall_private_logging_size_limit_is_set_to_16384_or_greater) {
+  if($harden_windows_server::ensure_windows_firewall_private_logging_size_limit_kb_is_set_to_16384_kb_or_greater) {
     registry::value { 'PrivateLogFileSize':
       key   => 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsFirewall\PrivateProfile\Logging',
       value => 'LogFileSize',
@@ -1380,7 +1380,7 @@ class harden_windows_server::configure {
     }
   }
 
-  if($harden_windows_server::ensure_windows_firewall_public_settings_display_a_notification_is_set_to_yes) {
+  if($harden_windows_server::ensure_windows_firewall_public_settings_display_a_notification_is_set_to_no) {
     registry::value { 'PublicDisableNotifications':
       key   => 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsFirewall\PublicProfile',
       value => 'DisableNotifications',
@@ -1407,7 +1407,7 @@ class harden_windows_server::configure {
     }
   }
 
-  if($harden_windows_server::ensure_windows_firewall_public_logging_name_is_set_to_publicfwlog) {
+  if($harden_windows_server::ensure_windows_firewall_public_logging_name_is_set_to_systemroot_system32_logfiles_firewall_publicfwlog) {
     registry::value { 'PublicLogFilePath':
       key   => 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsFirewall\PublicProfile\Logging',
       value => 'LogFilePath',
@@ -1416,7 +1416,7 @@ class harden_windows_server::configure {
     }
   }
 
-  if($harden_windows_server::ensure_windows_firewall_public_logging_size_limit_is_set_to_16384_or_greater) {
+  if($harden_windows_server::ensure_windows_firewall_public_logging_size_limit_kb_is_set_to_16384_kb_or_greater) {
     registry::value { 'PublicLogFileSize':
       key   => 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsFirewall\PublicProfile\Logging',
       value => 'LogFileSize',
@@ -1889,7 +1889,7 @@ class harden_windows_server::configure {
   #
   # }
 
-  if($harden_windows_server::ensure_always_use_classic_logon) {
+  if($harden_windows_server::ensure_always_use_classic_logon_is_set_to_enabled) {
     if(!$harden_windows_server::is_domain_controller) {
       registry::value { 'LogonType':
         key   => 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System',
@@ -1927,7 +1927,7 @@ class harden_windows_server::configure {
     }
   }
 
-  if($harden_windows_server::ensure_enable_rpc_endpoint_mapper_client_authentication_is_set_to_enabled) {
+  if($harden_windows_server::ensure_enable_rpc_endpoint_mapper_client_authentication_is_set_to_enabled_ms_only) {
     if(!$harden_windows_server::is_domain_controller) {
       registry::value { 'EnableAuthEpResolution':
         key   => 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Rpc',

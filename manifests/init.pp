@@ -366,7 +366,7 @@ class harden_windows_server (
   # $ensure_enable_rpc_endpoint_mapper_client_authentication_is_set_to_enabled = false
 
   # These I cannot find in L1 for 2008r2, 2012r2, or 2016, so i'm assuming they are in L2:
-  $ensure_windows_firewall_domain_settings_apply_local_firewall_rules_is_set_to_yes_default
+  $ensure_windows_firewall_domain_settings_apply_local_firewall_rules_is_set_to_yes_default = false
   $ensure_windows_firewall_domain_settings_apply_local_connection_security_rules_is_yes = false
   $ensure_windows_firewall_private_settings_apply_local_firewall_rules_is_set_to_yes_default = false
   $ensure_windows_firewall_private_settings_apply_local_connection_security_rules_is_set_to_yes_default = false
