@@ -321,8 +321,11 @@ class harden_windows_server (
   Boolean $ensure_configure_windows_spotlight_on_lockeen_is_set_to_disabled = false,
   Boolean $ensure_do_not_suggest_third_party_content_in_windows_spotlight_is_set_to_enabled = false,
 ) {
+
+  # TODO:
   # these ones are all existing as variable names in configure.pp that were not found in this
-  # init.pp as they likely are misspelt or not relevant
+  # init.pp params section above as they likely are misspelt, named differently, or not relevant to
+  # Windows CIS Level 1
   $configure_access_this_computer_configure_enable_computer_and_user_accounts_to_be_trusted_for_delegation_the_network = false
   $ensure_add_workstations_to_domain_is_set_to_administrators = false
   $configure_allow_log_on_locally = false
