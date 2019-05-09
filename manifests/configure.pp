@@ -273,7 +273,7 @@ class harden_windows_server::configure {
 
   if($harden_windows_server::configure_deny_access_to_this_computer_configure_enable_computer_and_user_accounts_to_be_trusted_for_delegation_the_network) {
     if($harden_windows_server::is_domain_controller) {
-      local_security_policy { 'Deny access to this computer configure_enable_computer_and_user_accounts_to_be_trusted_for_delegation the network':
+      local_security_policy { 'Deny access to this computer from the network':
         ensure         => 'present',
         policy_setting => 'SeDenyNetworkLogonRight',
         policy_type    => 'Privilege Rights',
@@ -281,7 +281,7 @@ class harden_windows_server::configure {
         policy_value   => 'set: Guests, Local',
       }
     } else {
-      local_security_policy { 'Deny access to this computer configure_enable_computer_and_user_accounts_to_be_trusted_for_delegation the network':
+      local_security_policy { 'Deny access to this computer from the network':
         ensure         => 'present',
         policy_setting => 'SeDenyNetworkLogonRight',
         policy_type    => 'Privilege Rights',

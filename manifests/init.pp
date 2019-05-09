@@ -323,36 +323,40 @@ class harden_windows_server (
   Boolean $ensure_do_not_suggest_third_party_content_in_windows_spotlight_is_set_to_enabled = false,
 ) {
 
-  # TODO:
-  # these ones are all existing as variable names in configure.pp that were not found in this
-  # init.pp params section above as they likely are misspelt, named differently, or not relevant to
-  # Windows CIS Level 1
-  $configure_access_this_computer_configure_enable_computer_and_user_accounts_to_be_trusted_for_delegation_the_network = false
+  # DC only - ignore for now
   $ensure_add_workstations_to_domain_is_set_to_administrators = false
+  $ensure_synchronize_directory_service_data_is_set_to_no_one = false
+  $ensure_domain_controller_allow_server_operators_to_schedule_tasks_is_set_to_disabled = false
+  $ensure_domain_controller_ldap_server_signing_requirements_is_set_to_require_signing = false
+  $ensure_domain_controller_refuse_machine_account_password_changes_is_set_to_disabled = false
+  $ensure_interactive_logon_require_domain_controller_authentication_to_unlock_workstation_is_set_to_enabled = false
+  $ensure_microsoft_network_server_spn_target_name_validation_level_is_set_to_accept_if_provided_by_client = false
+
+  # added to translator
+  $configure_access_this_computer_configure_enable_computer_and_user_accounts_to_be_trusted_for_delegation_the_network = false
   $configure_allow_log_on_locally = false
   $configure_deny_access_to_this_computer_configure_enable_computer_and_user_accounts_to_be_trusted_for_delegation_the_network = false
   $ensure_deny_log_on_through_remote_desktop_services_to_include_guests_local_account = false
   $configure_enable_computer_and_user_acounts_to_be_trusted_for_delegation = false
   $ensure_force_shutdown_configure_enable_computer_and_user_accounts_to_be_trusted_for_delegation_a_remote_system_is_set_to_administrators = false
   $ensure_lock_pages_in_menory_is_set_to_no_one = false
-  $ensure_synchronize_directory_service_data_is_set_to_no_one = false
   $ensure_accounts_limit_local_account_use_of_blank_password_to_console_logon_only_is_set_to_enabled = false
   $ensure_audit_force_audit_policy_subcategory_settings_to_override_audit_policy_category_settings = false
   $ensure_devices_prevent_users_configure_enable_computer_and_user_accounts_to_be_trusted_for_delegation_installing_printer_drivers_is_set_to_enabled = false
-  $ensure_domain_controller_allow_server_operators_to_schedule_tasks_is_set_to_disabled = false
-  $ensure_domain_controller_ldap_server_signing_requirements_is_set_to_require_signing = false
-  $ensure_domain_controller_refuse_machine_account_password_changes_is_set_to_disabled = false
   $ensure_domain_member_digitally_encrypt_or_sign_secure_channel_data_when_possible_is_set_to_enabled = false
   $ensure_domain_member_require_strong_session_key_windows_2000_or_later_is_set_to_enabled = false
   $ensure_interactive_logon_do_not_require_ctrl_alt_del_is_set_to_disabled = false
-  $ensure_interactive_logon_require_domain_controller_authentication_to_unlock_workstation_is_set_to_enabled = false
   $ensure_microsoft_network_server_idle_time_required_before_suspending_session_is_set_to_15_or_fewer_minutes = false
-  $ensure_microsoft_network_server_spn_target_name_validation_level_is_set_to_accept_if_provided_by_client = false
   $ensure_network_access_allow_anonymous_sid_name_tranlation_is_set_to_disabled = false
   $ensure_network_access_do_not_allow_anonymous_enumeration_of_sam_accounts_is_set_to_enabled = false
   $ensure_network_access_do_not_allow_anonymous_enumeration_of_sam_accounts_and_shared_is_set_to_enabled = false
-  $ensure_network_access_sharing_and_security_model_for_local_accounts_is_set_to_classic = false
   $ensure_network_security_allow_pku2u_authentication_requests_to_use_online_identities_is_set_to_disabled = false
+
+  # TODO:
+  # these ones are all existing as variable names in configure.pp that were not found in this
+  # init.pp params section above as they likely are misspelt, named differently, or not relevant to
+  # Windows CIS Level 1
+  $ensure_network_access_sharing_and_security_model_for_local_accounts_is_set_to_classic = false
   $ensure_network_security_configure_encryption_types_allow_for_kerberos = false
   $ensure_network_security_lan_manager_authentication_level_is_set_to_send_ntlmv2_response_only = false
   $ensure_network_security_ldap_client_signing_requirements_is_set_to_negotiate_signing = false
