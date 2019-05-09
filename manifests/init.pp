@@ -324,6 +324,9 @@ class harden_windows_server (
 
   Boolean $advanced_audit_policy_configuration = false,
   Boolean $basic_audit_policy_configuration = false,
+
+  String $administrator_account_name,
+  String $guest_account_name,
 ) {
 
   # DC only - ignore for now
@@ -334,36 +337,6 @@ class harden_windows_server (
   $ensure_domain_controller_refuse_machine_account_password_changes_is_set_to_disabled = false
   $ensure_interactive_logon_require_domain_controller_authentication_to_unlock_workstation_is_set_to_enabled = false
   $ensure_microsoft_network_server_spn_target_name_validation_level_is_set_to_accept_if_provided_by_client = false
-
-  # added to translator
-  # $configure_access_this_computer_configure_enable_computer_and_user_accounts_to_be_trusted_for_delegation_the_network = false
-  # $configure_allow_log_on_locally = false
-  # $configure_deny_access_to_this_computer_configure_enable_computer_and_user_accounts_to_be_trusted_for_delegation_the_network = false
-  # $ensure_deny_log_on_through_remote_desktop_services_to_include_guests_local_account = false
-  # $configure_enable_computer_and_user_acounts_to_be_trusted_for_delegation = false
-  # $ensure_force_shutdown_configure_enable_computer_and_user_accounts_to_be_trusted_for_delegation_a_remote_system_is_set_to_administrators = false
-  # $ensure_lock_pages_in_menory_is_set_to_no_one = false
-  # $ensure_accounts_limit_local_account_use_of_blank_password_to_console_logon_only_is_set_to_enabled = false
-  # $ensure_audit_force_audit_policy_subcategory_settings_to_override_audit_policy_category_settings = false
-  # $ensure_devices_prevent_users_configure_enable_computer_and_user_accounts_to_be_trusted_for_delegation_installing_printer_drivers_is_set_to_enabled = false
-  # $ensure_domain_member_digitally_encrypt_or_sign_secure_channel_data_when_possible_is_set_to_enabled = false
-  # $ensure_domain_member_require_strong_session_key_windows_2000_or_later_is_set_to_enabled = false
-  # $ensure_interactive_logon_do_not_require_ctrl_alt_del_is_set_to_disabled = false
-  # $ensure_microsoft_network_server_idle_time_required_before_suspending_session_is_set_to_15_or_fewer_minutes = false
-  # $ensure_network_access_allow_anonymous_sid_name_tranlation_is_set_to_disabled = false
-  # $ensure_network_access_do_not_allow_anonymous_enumeration_of_sam_accounts_is_set_to_enabled = false
-  # $ensure_network_access_do_not_allow_anonymous_enumeration_of_sam_accounts_and_shared_is_set_to_enabled = false
-  # $ensure_network_security_allow_pku2u_authentication_requests_to_use_online_identities_is_set_to_disabled = false
-  # $ensure_network_security_configure_encryption_types_allow_for_kerberos = false
-  # $ensure_network_security_ldap_client_signing_requirements_is_set_to_negotiate_signing = false
-  # $ensure_user_account_control_only_elevate_uiaccess_applications_that_are_installed_in_secure_locations = false
-  # $ensure_windows_firewall_private_logging_name_is_set_to_privatefwlog = false
-  # $ensure_windows_firewall_private_logging_size_limit_is_set_to_16384_or_greater = false
-  # $ensure_windows_firewall_public_settings_display_a_notification_is_set_to_yes = false
-  # $ensure_windows_firewall_public_logging_name_is_set_to_publicfwlog = false
-  # $ensure_windows_firewall_public_logging_size_limit_is_set_to_16384_or_greater = false
-  # $ensure_always_use_classic_logon = false
-  # $ensure_enable_rpc_endpoint_mapper_client_authentication_is_set_to_enabled = false
 
   # These I cannot find in L1 for 2008r2, 2012r2, or 2016, so i'm assuming they are in L2:
   $ensure_windows_firewall_domain_settings_apply_local_firewall_rules_is_set_to_yes_default = false

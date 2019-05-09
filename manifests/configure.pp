@@ -565,7 +565,7 @@ class harden_windows_server::configure {
       ensure         => 'present',
       policy_setting => 'NewAdministratorName',
       policy_type    => 'System Access',
-      policy_value   => '"adminaccount"',
+      policy_value   => $harden_windows_server::administrator_account_name,
     }
   }
 
@@ -574,7 +574,7 @@ class harden_windows_server::configure {
       ensure         => 'present',
       policy_setting => 'NewGuestName',
       policy_type    => 'System Access',
-      policy_value   => '"guestaccount"',
+      policy_value   => $harden_windows_server::guest_account_name,
     }
   }
 
