@@ -88,7 +88,7 @@ class harden_windows_server::configure {
     }
   }
 
-  if($harden_windows_server::configure_access_this_computer_configure_enable_computer_and_user_accounts_to_be_trusted_for_delegation_the_network) {
+  if($harden_windows_server::configure_access_this_computer_from_the_network) {
     if($harden_windows_server::is_domain_controller) {
       local_security_policy { 'Access this computer configure_enable_computer_and_user_accounts_to_be_trusted_for_delegation the network':
         ensure         => 'present',
@@ -136,7 +136,7 @@ class harden_windows_server::configure {
     }
   }
 
-  if($harden_windows_server::configure_allow_log_on_locally) {
+  if($harden_windows_server::ensure_allow_log_on_locally_is_set_to_administrators) {
     if($harden_windows_server::is_domain_controller) {
       local_security_policy { 'Allow log on locally':
         ensure         => 'present',
@@ -271,7 +271,7 @@ class harden_windows_server::configure {
     }
   }
 
-  if($harden_windows_server::configure_deny_access_to_this_computer_configure_enable_computer_and_user_accounts_to_be_trusted_for_delegation_the_network) {
+  if($harden_windows_server::configure_deny_access_to_this_computer_from_the_network) {
     if($harden_windows_server::is_domain_controller) {
       local_security_policy { 'Deny access to this computer from the network':
         ensure         => 'present',
@@ -321,7 +321,7 @@ class harden_windows_server::configure {
     }
   }
 
-  if($harden_windows_server::ensure_deny_log_on_through_remote_desktop_services_to_include_guests_local_account) {
+  if($harden_windows_server::configure_deny_log_on_through_remote_desktop_services) {
     local_security_policy { 'Deny log on through Remote Desktop Services':
       ensure         => 'present',
       policy_setting => 'SeDenyRemoteInteractiveLogonRight',
@@ -331,7 +331,7 @@ class harden_windows_server::configure {
     }
   }
 
-  if($harden_windows_server::configure_enable_computer_and_user_acounts_to_be_trusted_for_delegation) {
+  if($harden_windows_server::configure_enable_computer_and_user_accounts_to_be_trusted_for_delegation) {
     if($harden_windows_server::is_domain_controller) {
       local_security_policy { 'Enable computer and user accounts to be trusted for delegation':
         ensure         => 'present',
@@ -347,7 +347,7 @@ class harden_windows_server::configure {
     }
   }
 
-  if($harden_windows_server::ensure_force_shutdown_configure_enable_computer_and_user_accounts_to_be_trusted_for_delegation_a_remote_system_is_set_to_administrators) {
+  if($harden_windows_server::ensure_force_shutdown_from_a_remote_system_is_set_to_administrators) {
     local_security_policy { 'Force shutdown configure_enable_computer_and_user_accounts_to_be_trusted_for_delegation a remote system':
       ensure         => 'present',
       policy_setting => 'SeRemoteShutdownPrivilege',
@@ -408,7 +408,7 @@ class harden_windows_server::configure {
     }
   }
 
-  if($harden_windows_server::ensure_lock_pages_in_menory_is_set_to_no_one) {
+  if($harden_windows_server::ensure_lock_pages_in_memory_is_set_to_no_one) {
     local_security_policy { 'Lock pages in memory':
       ensure         => 'absent',
     }
@@ -551,7 +551,7 @@ class harden_windows_server::configure {
 
   #}
 
-  if($harden_windows_server::ensure_accounts_limit_local_account_use_of_blank_password_to_console_logon_only_is_set_to_enabled) {
+  if($harden_windows_server::ensure_accounts_limit_local_account_use_of_blank_passwords_to_console_logon_only_is_set_to_enabled) {
     local_security_policy { 'Accounts: Limit local account use of blank passwords to console logon only':
       ensure         => 'present',
       policy_setting => 'MACHINE\System\CurrentControlSet\Control\Lsa\LimitBlankPasswordUse',
@@ -578,7 +578,7 @@ class harden_windows_server::configure {
     }
   }
 
-  if($harden_windows_server::ensure_audit_force_audit_policy_subcategory_settings_to_override_audit_policy_category_settings) {
+  if($harden_windows_server::ensure_audit_force_audit_policy_subcategory_settings_windows_vista_or_later_to_override_audit_policy_category_settings_is_set_to_enabled) {
     $title2321 = 'Audit: Force audit policy subcategory settings (Windows Vista or later) to override audit policy category settings'
     local_security_policy { $title2321:
       ensure         => 'present',
@@ -606,7 +606,7 @@ class harden_windows_server::configure {
     }
   }
 
-  if($harden_windows_server::ensure_devices_prevent_users_configure_enable_computer_and_user_accounts_to_be_trusted_for_delegation_installing_printer_drivers_is_set_to_enabled) {
+  if($harden_windows_server::ensure_devices_prevent_users_from_installing_printer_drivers_is_set_to_enabledto_enabled) {
     local_security_policy { 'Devices: Prevent users configure_enable_computer_and_user_accounts_to_be_trusted_for_delegation installing printer drivers':
       ensure         => 'present',
       policy_setting => 'MACHINE\System\CurrentControlSet\Control\Print\Providers\LanMan Print Services\Servers\AddPrinterDrivers',
@@ -658,7 +658,7 @@ class harden_windows_server::configure {
     }
   }
 
-  if($harden_windows_server::ensure_domain_member_digitally_encrypt_or_sign_secure_channel_data_when_possible_is_set_to_enabled) {
+  if($harden_windows_server::ensure_domain_member_digitally_encrypt_secure_channel_data_when_possible_is_set_to_enabled) {
     local_security_policy { 'Domain member: Digitally encrypt secure channel data (when possible)':
       ensure         => 'present',
       policy_setting => 'MACHINE\System\CurrentControlSet\Services\Netlogon\Parameters\SealSecureChannel',
@@ -694,7 +694,7 @@ class harden_windows_server::configure {
     }
   }
 
-  if($harden_windows_server::ensure_domain_member_require_strong_session_key_windows_2000_or_later_is_set_to_enabled) {
+  if($harden_windows_server::ensure_domain_member_require_strong_windows_2000_or_later_session_key_is_set_to_enabled) {
     local_security_policy { 'Domain member: Require strong (Windows 2000 or later) session key':
       ensure         => 'present',
       policy_setting => 'MACHINE\System\CurrentControlSet\Services\Netlogon\Parameters\RequireStrongKey',
@@ -712,7 +712,7 @@ class harden_windows_server::configure {
     }
   }
 
-  if($harden_windows_server::ensure_interactive_logon_do_not_require_ctrl_alt_del_is_set_to_disabled) {
+  if($harden_windows_server::ensure_interactive_logon_do_not_require_ctrlaltdel_is_set_to_disabled) {
     local_security_policy { 'Interactive logon: Do not require CTRL+ALT+DEL':
       ensure         => 'present',
       policy_setting => 'MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System\DisableCAD',
@@ -809,7 +809,7 @@ class harden_windows_server::configure {
     }
   }
 
-  if($harden_windows_server::ensure_microsoft_network_server_idle_time_required_before_suspending_session_is_set_to_15_or_fewer_minutes) {
+  if($harden_windows_server::ensure_microsoft_network_server_amount_of_idle_time_required_before_suspending_session_is_set_to_15_or_fewer_minutes_but_not_0) {
     local_security_policy { 'Microsoft network server: Amount of idle time required before suspending session':
       ensure         => 'present',
       policy_setting => 'MACHINE\System\CurrentControlSet\Services\LanManServer\Parameters\AutoDisconnect',
@@ -845,7 +845,7 @@ class harden_windows_server::configure {
     }
   }
 
-  if($harden_windows_server::ensure_microsoft_network_server_spn_target_name_validation_level_is_set_to_accept_if_provided_by_client) {
+  if($harden_windows_server::ensure_microsoft_network_server_server_spn_target_name_validation_level_is_set_to_accept_if_provided_by_client_or_higher_ms_only) {
     if(!$harden_windows_server::is_domain_controller) {
       registry::value { 'SmbServerNameHardeningLevel':
         key   => 'HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\LanManServer\Parameters',
@@ -856,7 +856,7 @@ class harden_windows_server::configure {
     }
   }
 
-  if($harden_windows_server::ensure_network_access_allow_anonymous_sid_name_tranlation_is_set_to_disabled) {
+  if($harden_windows_server::ensure_network_access_allow_anonymous_sidname_translation_is_set_to_disabled) {
     local_security_policy { 'Network access: Allow anonymous SID/name translation':
       ensure         => 'present',
       policy_setting => 'LSAAnonymousNameLookup',
@@ -865,7 +865,7 @@ class harden_windows_server::configure {
     }
   }
 
-  if($harden_windows_server::ensure_network_access_do_not_allow_anonymous_enumeration_of_sam_accounts_is_set_to_enabled) {
+  if($harden_windows_server::ensure_network_access_do_not_allow_anonymous_enumeration_of_sam_accounts_is_set_to_enabled_ms_only) {
     if(!$harden_windows_server::is_domain_controller) {
       local_security_policy { 'Network access: Do not allow anonymous enumeration of SAM accounts':
         ensure         => 'present',
@@ -876,7 +876,7 @@ class harden_windows_server::configure {
     }
   }
 
-  if($harden_windows_server::ensure_network_access_do_not_allow_anonymous_enumeration_of_sam_accounts_and_shared_is_set_to_enabled) {
+  if($harden_windows_server::ensure_network_access_do_not_allow_anonymous_enumeration_of_sam_accounts_and_shares_is_set_to_enabled_ms_only) {
     if(!$harden_windows_server::is_domain_controller) {
       local_security_policy { 'Network access: Do not allow anonymous enumeration of SAM accounts and shares':
         ensure         => 'present',
@@ -957,7 +957,7 @@ class harden_windows_server::configure {
   #   }
   # }
 
-  if($harden_windows_server::ensure_network_access_sharing_and_security_model_for_local_accounts_is_set_to_classic) {
+  if($harden_windows_server::ensure_network_access_sharing_and_security_model_for_local_accounts_is_set_to_classic_local_users_authenticate_as_themselves) {
     local_security_policy { 'Network access: Sharing and security model for local accounts':
       ensure         => 'present',
       policy_setting => 'MACHINE\System\CurrentControlSet\Control\Lsa\ForceGuest',
@@ -984,7 +984,7 @@ class harden_windows_server::configure {
     }
   }
 
-  if($harden_windows_server::ensure_network_security_allow_pku2u_authentication_requests_to_use_online_identities_is_set_to_disabled) {
+  if($harden_windows_server::ensure_network_security_allow_pku2u_authentication_requests_to_this_computer_to_use_online_identities_is_set_to_disabled) {
     registry::value { 'AllowOnlineID':
       key   => 'HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Lsa\pku2u',
       value => 'AllowOnlineID',
@@ -1020,7 +1020,7 @@ class harden_windows_server::configure {
     }
   }
 
-  if($harden_windows_server::ensure_network_security_lan_manager_authentication_level_is_set_to_send_ntlmv2_response_only) {
+  if($harden_windows_server::ensure_network_security_lan_manager_authentication_level_is_set_to_send_ntlmv2_response_only_refuse_lm_ntlm) {
     local_security_policy { 'Network security: LAN Manager authentication level':
       ensure         => 'present',
       policy_setting => 'MACHINE\System\CurrentControlSet\Control\Lsa\LmCompatibilityLevel',
@@ -1038,7 +1038,7 @@ class harden_windows_server::configure {
     }
   }
 
-  if($harden_windows_server::ensure_network_security_minimum_session_security_for_ntlm_ssp_based_clients) {
+  if($harden_windows_server::ensure_network_security_minimum_session_security_for_ntlm_ssp_based_including_secure_rpc_clients_is_set_to_require_ntlmv2_session_security_require_128_bit_encryption) {
     local_security_policy { 'Network security: Minimum session security for NTLM SSP based (including secure RPC) clients':
       ensure         => 'present',
       policy_setting => 'MACHINE\System\CurrentControlSet\Control\Lsa\MSV1_0\NTLMMinClientSec',
@@ -1047,7 +1047,7 @@ class harden_windows_server::configure {
     }
   }
 
-  if($harden_windows_server::ensure_network_security_minimum_session_security_for_ntlm_ssp_based_servers) {
+  if($harden_windows_server::ensure_network_security_minimum_session_security_for_ntlm_ssp_based_including_secure_rpc_servers_is_set_to_require_ntlmv2_session_security_require_128_bit_encryption) {
     local_security_policy { 'Network security: Minimum session security for NTLM SSP based (including secure RPC) servers':
       ensure         => 'present',
       policy_setting => 'MACHINE\System\CurrentControlSet\Control\Lsa\MSV1_0\NTLMMinServerSec',
@@ -1056,7 +1056,7 @@ class harden_windows_server::configure {
     }
   }
 
-  if($harden_windows_server::ensure_shutdown_allow_system_to_be_shutdown_without_having_to_logon_is_set_to_disabled) {
+  if($harden_windows_server::ensure_shutdown_allow_system_to_be_shut_down_without_having_to_log_on_is_set_to_disabled) {
     local_security_policy { 'Shutdown: Allow system to be shut down without having to log on':
       ensure         => 'present',
       policy_setting => 'MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System\ShutdownWithoutLogon',
@@ -1065,7 +1065,7 @@ class harden_windows_server::configure {
     }
   }
 
-  if($harden_windows_server::ensure_system_objects_require_case_insensitivity_for_non_windows_subsystems_is_enabled) {
+  if($harden_windows_server::ensure_system_objects_require_case_insensitivity_for_non_windows_subsystems_is_set_to_enabled) {
     local_security_policy { 'System objects: Require case insensitivity for non-Windows subsystems':
       ensure         => 'present',
       policy_setting => 'MACHINE\System\CurrentControlSet\Control\Session Manager\Kernel\ObCaseInsensitive',
@@ -1074,7 +1074,7 @@ class harden_windows_server::configure {
     }
   }
 
-  if($harden_windows_server::ensure_system_objects_strengthen_default_permissions_of_internal_system_objects_is_enabled) {
+  if($harden_windows_server::ensure_system_objects_strengthen_default_permissions_of_internal_system_objects_eg_symbolic_links_is_set_to_enabled) {
     local_security_policy { 'System objects: Strengthen default permissions of internal system objects (e.g. Symbolic Links)':
       ensure         => 'present',
       policy_setting => 'MACHINE\System\CurrentControlSet\Control\Session Manager\ProtectionMode',
@@ -1092,7 +1092,7 @@ class harden_windows_server::configure {
     }
   }
 
-  if($harden_windows_server::ensure_user_account_control_admin_approval_mode_for_the_admin_account_is_enabled) {
+  if($harden_windows_server::ensure_user_account_control_admin_approval_mode_for_the_built_in_administrator_account_is_set_to_enabled) {
     local_security_policy { 'User Account Control: Admin Approval Mode for the Built-in Administrator account':
       ensure         => 'present',
       policy_setting => 'MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System\FilterAdministratorToken',
@@ -1101,7 +1101,7 @@ class harden_windows_server::configure {
     }
   }
 
-  if($harden_windows_server::ensure_user_account_control_allow_uiaccess_applications_to_prompt_for_elevation_is_disabled) {
+  if($harden_windows_server::ensure_user_account_control_allow_uiaccess_applications_to_prompt_for_elevation_without_using_the_secure_desktop_is_set_to_disabled) {
     local_security_policy { 'User Account Control: Allow UIAccess applications to prompt for elevation without using the secure desktop':
       ensure         => 'present',
       policy_setting => 'MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System\EnableUIADesktopToggle',
@@ -1110,7 +1110,7 @@ class harden_windows_server::configure {
     }
   }
 
-  if($harden_windows_server::ensure_user_account_control_behavior_of_the_elevation_prompt_for_administrators_in_admin_approval_mode) {
+  if($harden_windows_server::ensure_user_account_control_behavior_of_the_elevation_prompt_for_administrators_in_admin_approval_mode_is_set_to_prompt_for_consent_on_the_secure_desktop) {
     local_security_policy { 'User Account Control: Behavior of the elevation prompt for administrators in Admin Approval Mode':
       ensure         => 'present',
       policy_setting => 'MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System\ConsentPromptBehaviorAdmin',
@@ -1119,7 +1119,7 @@ class harden_windows_server::configure {
     }
   }
 
-  if($harden_windows_server::ensure_user_account_control_behavior_of_the_elevation_prompt_for_standard_users) {
+  if($harden_windows_server::ensure_user_account_control_behavior_of_the_elevation_prompt_for_standard_users_is_set_to_automatically_deny_elevation_requests) {
     local_security_policy { 'User Account Control: Behavior of the elevation prompt for standard users':
       ensure         => 'present',
       policy_setting => 'MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System\ConsentPromptBehaviorUser',
@@ -1128,7 +1128,7 @@ class harden_windows_server::configure {
     }
   }
 
-  if($harden_windows_server::ensure_user_account_control_detect_application_installations_and_prompt_for_elevation_is_enabled) {
+  if($harden_windows_server::ensure_user_account_control_only_elevate_uiaccess_applications_that_are_installed_in_secure_locations_is_set_to_enabled) {
     local_security_policy { 'User Account Control: Detect application installations and prompt for elevation':
       ensure         => 'present',
       policy_setting => 'MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System\EnableInstallerDetection',
@@ -1146,7 +1146,7 @@ class harden_windows_server::configure {
     }
   }
 
-  if($harden_windows_server::ensure_user_account_control_run_all_administrators_in_admin_approval_mode_is_enabled) {
+  if($harden_windows_server::ensure_user_account_control_run_all_administrators_in_admin_approval_mode_is_set_to_enabled) {
     local_security_policy { 'User Account Control: Run all administrators in Admin Approval Mode':
       ensure         => 'present',
       policy_setting => 'MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System\EnableLUA',
@@ -1155,7 +1155,7 @@ class harden_windows_server::configure {
     }
   }
 
-  if($harden_windows_server::ensure_user_account_control_switch_to_the_secure_desktop_when_prompting_for_elevation_is_enabled) {
+  if($harden_windows_server::ensure_user_account_control_switch_to_the_secure_desktop_when_prompting_for_elevation_is_set_to_enabled) {
     local_security_policy { 'User Account Control: Switch to the secure desktop when prompting for elevation':
       ensure         => 'present',
       policy_setting => 'MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System\PromptOnSecureDesktop',
@@ -1164,7 +1164,7 @@ class harden_windows_server::configure {
     }
   }
 
-  if($harden_windows_server::ensure_user_account_control_virtualize_file_and_registry_write_failures_to_per_user_location_is_enabled) {
+  if($harden_windows_server::ensure_user_account_control_virtualize_file_and_registry_write_failures_to_per_user_locations_is_set_to_enabled) {
     local_security_policy { 'User Account Control: Virtualize file and registry write failures to per-user locations':
       ensure         => 'present',
       policy_setting => 'MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System\EnableVirtualization',
@@ -1227,7 +1227,7 @@ class harden_windows_server::configure {
     }
   }
 
-  if($harden_windows_server::ensure_windows_firewall_domain_logging_name_is_set_to_domainfwlog) {
+  if($harden_windows_server::ensure_windows_firewall_domain_logging_name_is_set_to_systemroot_system32_logfiles_firewall_domainfwlog) {
     registry::value { 'DomainLogFilePath':
       key   => 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsFirewall\DomainProfile\Logging',
       value => 'LogFilePath',
@@ -1236,7 +1236,7 @@ class harden_windows_server::configure {
     }
   }
 
-  if($harden_windows_server::ensure_windows_firewall_domain_logging_size_limit_is_16384_or_greater) {
+  if($harden_windows_server::ensure_windows_firewall_domain_logging_size_limit_kb_is_set_to_16384_kb_or_greater) {
     registry::value { 'DomainLogFileSize':
       key   => 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsFirewall\DomainProfile\Logging',
       value => 'LogFileSize',
