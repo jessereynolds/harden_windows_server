@@ -90,7 +90,7 @@ class harden_windows_server::configure {
 
   if($harden_windows_server::configure_access_this_computer_from_the_network) {
     if($harden_windows_server::is_domain_controller) {
-      local_security_policy { 'Access this computer configure_enable_computer_and_user_accounts_to_be_trusted_for_delegation the network':
+      local_security_policy { 'Access this computer from the network':
         ensure         => 'present',
         policy_setting => 'SeNetworkLogonRight',
         policy_type    => 'Privilege Rights',
@@ -98,7 +98,7 @@ class harden_windows_server::configure {
         policy_value   => 'set: Administrators, Authenticated Users, Enterprise Domain Controllers',
       }
     } else {
-      local_security_policy { 'Access this computer configure_enable_computer_and_user_accounts_to_be_trusted_for_delegation the network':
+      local_security_policy { 'Access this computer from the network':
         ensure         => 'present',
         policy_setting => 'SeNetworkLogonRight',
         policy_type    => 'Privilege Rights',
@@ -348,7 +348,7 @@ class harden_windows_server::configure {
   }
 
   if($harden_windows_server::ensure_force_shutdown_from_a_remote_system_is_set_to_administrators) {
-    local_security_policy { 'Force shutdown configure_enable_computer_and_user_accounts_to_be_trusted_for_delegation a remote system':
+    local_security_policy { 'Force shutdown from a remote system':
       ensure         => 'present',
       policy_setting => 'SeRemoteShutdownPrivilege',
       policy_type    => 'Privilege Rights',
@@ -607,7 +607,7 @@ class harden_windows_server::configure {
   }
 
   if($harden_windows_server::ensure_devices_prevent_users_from_installing_printer_drivers_is_set_to_enabled) {
-    local_security_policy { 'Devices: Prevent users configure_enable_computer_and_user_accounts_to_be_trusted_for_delegation installing printer drivers':
+    local_security_policy { 'Devices: Prevent users from installing printer drivers':
       ensure         => 'present',
       policy_setting => 'MACHINE\System\CurrentControlSet\Control\Print\Providers\LanMan Print Services\Servers\AddPrinterDrivers',
       policy_type    => 'Registry Values',
